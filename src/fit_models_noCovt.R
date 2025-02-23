@@ -42,6 +42,10 @@ data$date <- as.Date(data$date, "%d/%m/%Y") #"%Y-%m-%d"
 data <- data[order(data$date,data$region),] 
 rownames(data)<-1:nrow(data)
 
+data <- data %>% 
+  mutate(p = obs/popn,
+         rate = 10000*(obs/popn))
+
 #get data for train and validation period (2017 to 2022)
 data.req <- data %>%
   filter(year >= 2017 & year <=2022)  
